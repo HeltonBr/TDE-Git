@@ -1,0 +1,8 @@
+Matriz A:
+52 34 
+86 78 
+Matriz B:
+78 78 
+78 78 |nMatriz C=A+B:
+130112
+164156
