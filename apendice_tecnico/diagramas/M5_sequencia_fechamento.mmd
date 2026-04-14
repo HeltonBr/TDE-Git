@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant OQ as SaidaOQUE
+    participant M5 as ModuloFechamento
+    participant POL as ProcessarPolitica
+    participant AUD as TrilhaAuditoria
+
+    OQ->>M5: tabelaFinal + localPrincipal + localReferencia + flagsOQUE
+    M5->>M5: aplicarPortasA_B_C()
+    M5->>M5: validarSuficienciaSemantica()
+
+    alt tema suficiente
+      M5->>M5: patchS_definirTemaDefinitivo()
+      M5->>AUD: registrar("winner_definido", score, motivo)
+    else insuficiente
+      M5->>POL: fallbackInstitucional(politica, contexto)
+      POL-->>M5: temaAlternativo
+      M5->>AUD: registrar("generic_fallback", motivo)
+    end
+
+    alt local válido
+      M5->>M5: comporResumo(tema, localPrincipal, localReferencia)
+    else local ausente/ambíguo
+      M5->>M5: comporResumoSeguro(tema, sufixoTerritorial)
+      M5->>AUD: registrar("saida_segura", sem_local_principal)
+    end
+
+    M5-->>OQ: resumoDemandaAutomatico + fechamentoAudit

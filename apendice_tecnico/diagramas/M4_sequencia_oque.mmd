@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant ON as SaidaONDE
+    participant OQ as ModuloOQUE
+    participant DB as DicionarioBruto
+    participant DE as DicionarioEspecialista
+    participant DM as DicionarioMatriz
+    ON->>OQ: textoParaTemas
+    OQ->>DB: matchMacroMicro()
+    OQ->>DE: matchEspecialista()
+    OQ->>DM: equalizarEscopoMinimo()
+    OQ->>OQ: calcularScoreComparavelGlobal()
+    OQ->>OQ: arbitrarWinnerSecundario()
+    OQ-->>ON: temaPreliminar + tabelaFinalOrdenada

@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant M1 as SaidaM1
+    participant ONDE as ModuloONDE
+    participant LOC as DicionarioLocais
+    participant CG as ConectoresGlobais
+    M1->>ONDE: textoBuscaInicial
+    ONDE->>LOC: buscarChaves(LOG/ATIVO/OUTRO)
+    LOC-->>ONDE: candidatosLocal
+    ONDE->>CG: aplicarConectoresEspaciais()
+    CG-->>ONDE: referenciaNormalizada
+    ONDE->>ONDE: deduplicarEncadeamentos()
+    ONDE-->>M1: localPrincipal + localReferencia + textoParaTemas

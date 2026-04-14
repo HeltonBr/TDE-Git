@@ -1,0 +1,12 @@
+erDiagram
+    DICIONARIO_BRUTO ||--o{ MATCH_TEMATICO : contribui
+    DICIONARIO_ESPECIALISTA ||--o{ MATCH_TEMATICO : contribui
+    DICIONARIO_MATRIZ ||--o{ MATCH_TEMATICO : equaliza
+    MATCH_TEMATICO ||--|| TABELA_FINAL_ORDENADA : agrega
+    TABELA_FINAL_ORDENADA ||--|| FECHAMENTO_TEMATICO : decide
+    FECHAMENTO_TEMATICO {
+      string winner
+      string secundario_controlado
+      string score_global
+      string oque_audit
+    }

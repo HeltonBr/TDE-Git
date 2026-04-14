@@ -1,0 +1,13 @@
+erDiagram
+    ENTRADA_BRUTA ||--|| TEXTO_HIGIENIZADO : transforma
+    ENTRADA_BRUTA {
+      string id_linha
+      string comentario
+      string politica
+    }
+    TEXTO_HIGIENIZADO {
+      string id_linha
+      string texto_busca_inicial
+      string tokens_normalizados
+      string versao_patch
+    }
