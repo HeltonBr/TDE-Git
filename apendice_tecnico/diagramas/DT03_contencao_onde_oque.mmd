@@ -1,6 +1,14 @@
 flowchart TD
-    A[Saída ONDE: localPrincipal + localReferencia + texto residual] --> B[Blindagem de spans locativos]
-    B --> C[Remoção de conectores espaciais remanescentes]
-    C --> D[Preservação de termos temáticos úteis]
-    D --> E[textoParaTemas limpo]
-    E --> F[Entrada no OQUE]
+    A[Entrada: localPrincipal + localReferencia + texto residual] --> B[Identificar spans locativos e âncoras]
+    B --> C{Há risco de vazamento locativo no tema?}
+    C -- Sim --> D[Blindar spans e remover conectores espaciais residuais]
+    C -- Não --> E[Preservar conteúdo semântico útil]
+    D --> F[Reavaliar residual]
+    E --> F
+    F --> G{Residual mínimo para OQUE?}
+    G -- Sim --> H[Gerar textoParaTemas]
+    G -- Não --> I[Aplicar saída segura: residual controlado]
+    H --> J[Registrar auditoria: contencao_ok]
+    I --> K[Registrar auditoria: contencao_saida_segura]
+    J --> L[Saída para OQUE: textoParaTemas + contencaoAudit]
+    K --> L

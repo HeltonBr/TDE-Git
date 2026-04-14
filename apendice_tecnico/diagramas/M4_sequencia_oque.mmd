@@ -4,10 +4,25 @@ sequenceDiagram
     participant DB as DicionarioBruto
     participant DE as DicionarioEspecialista
     participant DM as DicionarioMatriz
-    ON->>OQ: textoParaTemas
+    participant AUD as TrilhaAuditoria
+
+    ON->>OQ: textoParaTemas + contextoLocativo
     OQ->>DB: matchMacroMicro()
     OQ->>DE: matchEspecialista()
     OQ->>DM: equalizarEscopoMinimo()
     OQ->>OQ: calcularScoreComparavelGlobal()
-    OQ->>OQ: arbitrarWinnerSecundario()
-    OQ-->>ON: temaPreliminar + tabelaFinalOrdenada
+
+    alt tema único suficiente
+      OQ->>OQ: definirWinnerDireto()
+      OQ->>AUD: registrar("oque_winner_direto", score)
+    else competição relevante
+      OQ->>OQ: arbitrarWinnerSecundarioControlado()
+      OQ->>AUD: registrar("oque_arbitrado", winner, secundario)
+    end
+
+    alt baixa evidência semântica
+      OQ->>OQ: marcarFallbackElegivel()
+      OQ->>AUD: registrar("oque_baixa_evidencia", motivo)
+    end
+
+    OQ-->>ON: temaPreliminar + tabelaFinalOrdenada + oqueAudit

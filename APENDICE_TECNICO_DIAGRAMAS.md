@@ -34,4 +34,5 @@ Cada diagrama deve referenciar explicitamente o módulo, a entrada, a transforma
 
 ## Critério de qualidade para evolução de diagramas
 - Todo diagrama deve indicar ponto de decisão, fallback e saída auditável quando aplicável.
-- Diagramas de fechamento (DT-05/DT-06) devem explicitar trilha de auditoria e condição de saída segura.
+- DT-02 (ONDE), DT-03 (Contenção), DT-04 (OQUE), DT-05 (Fechamento) e DT-06 (Composição) devem seguir o mesmo padrão de trilha de decisão/auditoria.
+- Diagramas de fechamento/composição devem explicitar condição de saída segura.
