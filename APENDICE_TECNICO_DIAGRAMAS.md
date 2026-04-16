@@ -1,6 +1,6 @@
 # Apêndice A — Diagramas Técnicos Sequenciais da Ferramenta
 
-**Versão:** v2.1  
+**Versão:** v2.4  
 **Data:** 2026-04-14  
 **Responsável:** Arquitetura Técnica
 
@@ -22,6 +22,10 @@ Este apêndice concentra somente engenharia detalhada, preservando o corpo princ
 - DT-05 → `apendice_tecnico/diagramas/M5_sequencia_fechamento.mmd`
 - DT-06 → `apendice_tecnico/diagramas/DT06_composicao_resumo.mmd`
 
+## Nomenclatura de auditoria (implementada x conceitual)
+- **Implementada (observável no pacote):** `ONDE_AUDIT_FLAGS`, `OQUE_AUDIT`, `OQUE_FALLBACK_AUDIT`, `DECISAO_FINAL`.
+- **Conceitual (documentação):** trilhas de contenção e composição podem aparecer como rótulos de auditoria, sem implicar nome literal de campo no runtime.
+
 ## Modelo lógico de entidades informacionais (em substituição ao DER clássico)
 - MLEI-ONDE → `apendice_tecnico/diagramas/M2M3_der_onde.mmd`
 - MLEI-OQUE → `apendice_tecnico/diagramas/M4_der_oque.mmd`
@@ -31,8 +35,7 @@ Este apêndice concentra somente engenharia detalhada, preservando o corpo princ
 ## Regra editorial do apêndice
 Cada diagrama deve referenciar explicitamente o módulo, a entrada, a transformação e a saída auditável.
 
-
 ## Critério de qualidade para evolução de diagramas
 - Todo diagrama deve indicar ponto de decisão, fallback e saída auditável quando aplicável.
-- DT-02 (ONDE), DT-03 (Contenção), DT-04 (OQUE), DT-05 (Fechamento) e DT-06 (Composição) devem seguir o mesmo padrão de trilha de decisão/auditoria.
-- Diagramas de fechamento/composição devem explicitar condição de saída segura.
+- DT-02 (ONDE), DT-03 (Contenção), DT-04 (OQUE), DT-05 (Fechamento) e DT-06 (Composição) seguem o mesmo padrão de trilha de decisão/auditoria.
+- Em DT-04, o fallback final é definido em DT-05 (M5/Patch S).

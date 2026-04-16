@@ -1,15 +1,9 @@
 flowchart TD
-    A[TemaDefinitivo] --> D[Compositor final]
-    B[Local principal] --> D
-    C[Referência territorial] --> D
-    D --> E{Local principal é válido?}
-    E -- Sim --> F[Aplicar prefixo locativo compatível]
-    E -- Não --> G[Aplicar referência/sufixo territorial seguro]
-    F --> H{Tema definitivo presente?}
-    G --> H
-    H -- Sim --> I[Concatenar tema + local + referência]
-    H -- Não --> J[Saída segura: Revisar Demanda]
-    I --> K[Normalizar espaços e pontuação]
-    J --> K
-    K --> L[Registrar auditoria: composicao_status]
-    L --> M[Resumo da Demanda Automático + composicaoAudit]
+    A[TemaDefinitivo] --> B{Tema definitivo presente?}
+    B -- Sim --> C[Compor TextoLocal com localPrincipal e/ou localReferencia]
+    B -- Não --> D[Saída segura: Revisar Demanda]
+    C --> E[Aplicar prefixo/sufixo territorial quando couber]
+    E --> F[Normalizar espaços e pontuação]
+    D --> F
+    F --> G[Registrar trilha auditável de composição]
+    G --> H[Resumo da Demanda Automático]

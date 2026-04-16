@@ -1,47 +1,37 @@
 # Relatório Gerencial Unificado das Atualizações Implementadas
 
-**Versão:** v2.3  
+**Versão:** v2.4  
 **Data:** 2026-04-14  
 **Responsável:** Arquitetura, QA e Governança
 
 ## 1) Objetivo
-Consolidar em um único documento as atualizações já implementadas (incluindo DT-05) e a nova evolução de robustez aplicada em DT-02, DT-03, DT-04 e DT-06.
+Consolidar as atualizações implementadas no pacote documental e aplicar o alinhamento fino entre diagramas e nomenclatura real da v252.
 
-## 2) Atualizações estruturais já implementadas
-- Corpo principal mantido leve e narrativo, com detalhamento técnico segregado em apêndices.
-- Apêndice A organizado por DT-01..DT-06.
-- Apêndice B organizado por CV-01..CV-06.
-- Critérios de rastreabilidade requisito ↔ teste ↔ diagrama ↔ caso visual.
+## 2) Pontos validados
+- Corpo principal leve e narrativo, com detalhamento técnico nos apêndices.
+- Apêndice A (DT-01..DT-06) e Apêndice B (CV-01..CV-06) segregados.
+- Padronização de decisão + saída segura + trilha auditável nos DTs críticos.
 
-## 3) Evolução de robustez aplicada nesta atualização
-### 3.1 DT-02 (ONDE)
-- Incluído gate de decisão `local válido vs local inválido`.
-- Incluído registro de auditoria para ambos os caminhos.
-- Saída padronizada com `ondeAudit`.
+## 3) Retificações aplicadas nesta rodada
+### 3.1 Literalidade dos nomes de auditoria
+- Distinção explícita entre nomes implementados (`ONDE_AUDIT_FLAGS`, `OQUE_AUDIT`, `OQUE_FALLBACK_AUDIT`, `DECISAO_FINAL`) e rótulos conceituais de auditoria.
 
-### 3.2 DT-03 (Contenção ONDE→OQUE)
-- Incluída decisão de risco de vazamento locativo.
-- Inclusão de saída segura para residual insuficiente.
-- Registro explícito de `contencao_ok` e `contencao_saida_segura`.
+### 3.2 DT-02 (ONDE)
+- Gate renomeado para **"local válido no contexto locativo"**.
 
 ### 3.3 DT-04 (OQUE)
-- Inclusão de decisão `tema único suficiente vs competição relevante`.
-- Registro de arbitragem e baixa evidência semântica.
-- Saída padronizada com `oqueAudit`.
+- Inclusa nota explícita de fronteira: OQUE marca elegibilidade; fallback final é consolidado no **M5/Patch S**.
 
-### 3.4 DT-05 (Fechamento) [já implementado]
-- Mantido com trilha de auditoria de winner/fallback.
-- Mantida condição de saída segura para ausência/ambiguidade locativa.
+### 3.4 DT-06 (Composição)
+- Fluxo simplificado para espelhar regra real: se há `TemaDefinitivo`, compõe com local principal/referência; sem tema, `Revisar Demanda`.
 
-### 3.5 DT-06 (Composição final)
-- Inclusão de gates de validade de local e presença de tema definitivo.
-- Fluxo de saída segura `Revisar Demanda`.
-- Registro de `composicao_status`.
+### 3.5 CV-02..CV-06
+- Casos visuais atualizados com trilha auditável correlata (implementada ou conceitual).
 
-## 4) Ganho de consistência para a entrega
-- Padronização transversal da lógica de decisão.
-- Auditabilidade homogênea de ponta a ponta.
-- Melhor capacidade de defesa técnica e verificação em banca.
+## 4) Avaliação das imagens enviadas
+- Os diagramas macro e por módulo estão aderentes à espinha M1→M5.
+- CV-01..CV-06 estão coerentes com o objetivo de prova modular da inovação.
+- Recomenda-se apenas manter a legenda de auditoria alinhada ao quadro "implementado x conceitual" do Apêndice A.
 
-## 5) Próximo passo recomendado
-Atualizar os casos CV-02..CV-06 com campos de auditoria correspondentes (`ondeAudit`, `contencaoAudit`, `oqueAudit`, `fechamentoAudit`, `composicaoAudit`) para rastreabilidade visual completa.
+## 5) Status
+Pacote documental considerado **consistente e robusto**, com alinhamento técnico-editorial pronto para fechamento.

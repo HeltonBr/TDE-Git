@@ -8,7 +8,7 @@ flowchart TD
     F --> G{Residual mínimo para OQUE?}
     G -- Sim --> H[Gerar textoParaTemas]
     G -- Não --> I[Aplicar saída segura: residual controlado]
-    H --> J[Registrar auditoria: contencao_ok]
-    I --> K[Registrar auditoria: contencao_saida_segura]
-    J --> L[Saída para OQUE: textoParaTemas + contencaoAudit]
+    H --> J[Registrar auditoria conceitual: ONDE_OQUE_AUDIT_OK]
+    I --> K[Registrar auditoria conceitual: ONDE_OQUE_AUDIT_SAFE]
+    J --> L[Saída para OQUE: textoParaTemas + trilha auditável]
     K --> L

@@ -3,7 +3,7 @@ sequenceDiagram
     participant ONDE as ModuloONDE
     participant LOC as DicionarioLocais
     participant CG as ConectoresGlobais
-    participant AUD as TrilhaAuditoria
+    participant AUD as AuditoriaONDE
 
     M1->>ONDE: textoBuscaInicial + metadataHigienizacao
     ONDE->>LOC: buscarChaves(LOG/ATIVO/OUTRO)
@@ -12,13 +12,13 @@ sequenceDiagram
     CG-->>ONDE: referenciaNormalizada
     ONDE->>ONDE: extrairPayloadPosChave()
 
-    alt local válido
+    alt local válido no contexto locativo
       ONDE->>ONDE: deduplicarEncadeamentos()
-      ONDE->>AUD: registrar("onde_valido", localPrincipal, referencia)
-    else local inválido/ruído
+      ONDE->>AUD: registrar("ONDE_AUDIT_OK", flags)
+    else local inválido/ruído contextual
       ONDE->>ONDE: descartarOuMarcarSomenteAuditoria()
-      ONDE->>AUD: registrar("onde_descartado", motivo)
+      ONDE->>AUD: registrar("ONDE_AUDIT_DESCARTE", motivo)
     end
 
     ONDE->>ONDE: gerarTextoParaTemasBlindado()
-    ONDE-->>M1: localPrincipal + localReferencia + textoParaTemas + ondeAudit
+    ONDE-->>M1: localPrincipal + localReferencia + textoParaTemas + ONDE_AUDIT_FLAGS
