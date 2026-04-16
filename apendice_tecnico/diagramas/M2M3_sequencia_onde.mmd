@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant M1 as SaidaM1
+    participant ONDE as ModuloONDE
+    participant LOC as DicionarioLocais
+    participant CG as ConectoresGlobais
+    participant AUD as AuditoriaONDE
+
+    M1->>ONDE: textoBuscaInicial + metadataHigienizacao
+    ONDE->>LOC: buscarChaves(LOG/ATIVO/OUTRO)
+    LOC-->>ONDE: candidatosLocal
+    ONDE->>CG: aplicarConectoresEspaciais()
+    CG-->>ONDE: referenciaNormalizada
+    ONDE->>ONDE: extrairPayloadPosChave()
+
+    alt local válido no contexto locativo
+      ONDE->>ONDE: deduplicarEncadeamentos()
+      ONDE->>AUD: registrar("ONDE_AUDIT_OK", flags)
+    else local inválido/ruído contextual
+      ONDE->>ONDE: descartarOuMarcarSomenteAuditoria()
+      ONDE->>AUD: registrar("ONDE_AUDIT_DESCARTE", motivo)
+    end
+
+    ONDE->>ONDE: gerarTextoParaTemasBlindado()
+    ONDE-->>M1: localPrincipal + localReferencia + textoParaTemas + ONDE_AUDIT_FLAGS

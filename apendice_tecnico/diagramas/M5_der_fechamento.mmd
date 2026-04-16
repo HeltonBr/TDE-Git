@@ -1,0 +1,14 @@
+erDiagram
+    FECHAMENTO_TEMATICO ||--|| TEMA_DEFINITIVO : define
+    SAIDA_ONDE ||--|| RESUMO_MONTADO : compoe
+    TEMA_DEFINITIVO ||--|| RESUMO_MONTADO : concatena
+    TEMA_DEFINITIVO {
+      string tema
+      string origem
+      string justificativa
+    }
+    RESUMO_MONTADO {
+      string resumo_demanda_automatico
+      string sufixo_territorial
+      string trilha_auditoria
+    }

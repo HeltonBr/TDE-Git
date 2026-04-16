@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant E as Executor
+    participant M1 as ModuloHigienizacao
+    participant D as DicionarioLocais
+    E->>M1: enviar(comentarioBruto, politica)
+    M1->>M1: removerAcentosEspacos()
+    M1->>M1: ajustarPreposicoes()
+    M1->>M1: normalizarNumeraisReferencia()
+    M1->>D: validarCompostosCanonicos()
+    D-->>M1: compostosValidados
+    M1-->>E: textoBuscaInicial + metadataHigienizacao

@@ -1,0 +1,20 @@
+erDiagram
+    DICIONARIO_LOCAIS ||--o{ RECORD_LOCATIVO : gera
+    CONECTOR_GLOBAL ||--o{ RECORD_LOCATIVO : complementa
+    RECORD_LOCATIVO ||--|| SAIDA_ONDE : consolida
+    DICIONARIO_LOCAIS {
+      string termo
+      string tipo
+      bool exige_complemento
+    }
+    RECORD_LOCATIVO {
+      string texto
+      string tipo
+      bool eh_referencia
+      string flags
+    }
+    SAIDA_ONDE {
+      string local_principal
+      string local_referencia
+      string texto_para_temas
+    }

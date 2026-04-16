@@ -1,0 +1,9 @@
+flowchart TD
+    A[TemaDefinitivo] --> B{Tema definitivo presente?}
+    B -- Sim --> C[Compor TextoLocal com localPrincipal e/ou localReferencia]
+    B -- Não --> D[Saída segura: Revisar Demanda]
+    C --> E[Aplicar prefixo/sufixo territorial quando couber]
+    E --> F[Normalizar espaços e pontuação]
+    D --> F
+    F --> G[Registrar trilha auditável de composição]
+    G --> H[Resumo da Demanda Automático]

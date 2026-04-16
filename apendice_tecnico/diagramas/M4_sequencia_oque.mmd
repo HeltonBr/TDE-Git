@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant ON as SaidaONDE
+    participant OQ as ModuloOQUE
+    participant DB as DicionarioBruto
+    participant DE as DicionarioEspecialista
+    participant DM as DicionarioMatriz
+    participant AUD as AuditoriaOQUE
+
+    ON->>OQ: textoParaTemas + contextoLocativo
+    OQ->>DB: matchMacroMicro()
+    OQ->>DE: matchEspecialista()
+    OQ->>DM: equalizarEscopoMinimo()
+    OQ->>OQ: calcularScoreComparavelGlobal()
+
+    alt tema único suficiente
+      OQ->>OQ: definirWinnerDireto()
+      OQ->>AUD: registrar("OQUE_AUDIT", winner, score)
+    else competição relevante
+      OQ->>OQ: arbitrarWinnerSecundarioControlado()
+      OQ->>AUD: registrar("OQUE_AUDIT", winner, secundario)
+    end
+
+    alt baixa evidência semântica
+      OQ->>OQ: marcarElegibilidadeFallback()
+      OQ->>AUD: registrar("OQUE_FALLBACK_AUDIT", motivo)
+    end
+
+    Note over OQ: O fallback final é consolidado no M5/Patch S
+    OQ-->>ON: temaPreliminar + tabelaFinalOrdenada + OQUE_AUDIT + OQUE_FALLBACK_AUDIT
